@@ -48,7 +48,7 @@
                 fetch('https://hooks.zapier.com/hooks/catch/20558743/25wfxvf/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: code },{ "exp-webhook": "from.github" })
+                    body: JSON.stringify({ code: code })
                 })
                 .then(response => console.log('Webhook sent:', response))
                 .catch(error => console.error('Error:', error));

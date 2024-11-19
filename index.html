@@ -40,22 +40,20 @@
         }
     </style>
     <script>
-        // Automatically post the querystring "code" parameter to the Zapier webhook
-        window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get('code');
-            if (code) {
-                fetch('https://hooks.zapier.com/hooks/catch/20558743/25wfxvf/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: code })
-                })
-                .then(response => console.log('Webhook sent:', response))
-                .catch(error => console.error('Error:', error));
-            } else {
-                console.warn('No "code" parameter found in the query string.');
-            }
-        };
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        if (code) {
+            const webhookURL = `https://hooks.zapier.com/hooks/catch/20558743/25wfxvf/?code=${encodeURIComponent(code)}`;
+            fetch(webhookURL, {
+                method: 'GET',
+            })
+            .then(response => console.log('Webhook sent:', response))
+            .catch(error => console.error('Error:', error));
+        } else {
+            console.warn('No "code" parameter found in the query string.');
+        }
+    };
     </script>
 </head>
 <body>
